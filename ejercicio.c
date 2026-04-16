@@ -1,27 +1,28 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
     float notas[5][3];
     float suma_est, suma_asig;
     int aprobados, reprobados;
 
-    printf("--- SISTEMA DE GESTION DE CALIFICACIONES ---\n");
-
-    // 1. Lectura de datos con validacion
+    // 1. Ingreso de datos con validación
     for (int i = 0; i < 5; i++) {
-        printf("\nEstudiante %d:\n", i + 1);
+        printf("\n--- Estudiante %d ---\n", i + 1);
         for (int j = 0; j < 3; j++) {
             do {
-                printf("  Asignatura %d (0-10): ", j + 1);
-                scanf("%f", &notas[i][j]);
+                printf(" Asignatura %d (0-10): ", j + 1);
+                if (scanf("%f", &notas[i][j]) != 1) {
+                    while(getchar() != '\n'); // Limpiar buffer si meten letras
+                }
                 if (notas[i][j] < 0 || notas[i][j] > 10) {
-                    printf("  [Error] La nota debe estar entre 0 y 10. Intente de nuevo.\n");
+                    printf(" [Error] Nota invalida. Intente de nuevo.\n");
                 }
             } while (notas[i][j] < 0 || notas[i][j] > 10);
         }
     }
 
- // 2. Resultados detallados por Estudiante
+    // 2. Reporte de Promedios por Estudiante
     printf("\n============================================\n");
     printf("        REPORTE DETALLADO: PROMEDIOS        \n");
     printf("============================================\n");
@@ -33,31 +34,30 @@ int main() {
             if (notas[i][j] > max) max = notas[i][j];
             if (notas[i][j] < min) min = notas[i][j];
         }
-        printf("ID: Estudiante %d | Prom: %.2f | Max: %.2f | Min: %.2f\n", 
+        printf("Estudiante %d | Prom: %.2f | Max: %.2f | Min: %.2f\n", 
                 i + 1, suma_est / 3, max, min);
     }
 
-   // 3. Reporte de Rendimiento por Asignatura
+    // 3. Estadisticas por Asignatura
     printf("\n============================================\n");
     printf("     ESTADISTICAS DE APROBACION (>= 6)      \n");
     printf("============================================\n");
     for (int j = 0; j < 3; j++) {
-        suma_asig = 0;
-        aprobados = 0;
-        reprobados = 0;
-        float max_a = notas[0][j], min_a = notas[0][j];
-
+        suma_asig = 0; aprobados = 0; reprobados = 0;
         for (int i = 0; i < 5; i++) {
             suma_asig += notas[i][j];
-            if (notas[i][j] >= 6.0) {
-                aprobados++;
-            } else {
-                reprobados++;
-            }
-            if (notas[i][j] > max_a) max_a = notas[i][j];
-            if (notas[i][j] < min_a) min_a = notas[i][j];
+            if (notas[i][j] >= 6.0) aprobados++;
+            else reprobados++;
         }
-        printf("ASIGNATURA %d -> Prom: %.2f | Aprobados: %d | Reprobados: %d\n", 
+        printf("Asig %d -> Prom: %.2f | Ap: %d | Rep: %d\n", 
                 j + 1, suma_asig / 5, aprobados, reprobados);
     }
-// Paso numero 2
+
+    // CIERRE DEL SISTEMA (Cambio del 5to Commit)
+    printf("\n********************************************\n");
+    printf("* PROCESAMIENTO DE DATOS FINALIZADO        *\n");
+    printf("* SISTEMA DE GESTION ACADEMICA - FAE No.1  *\n");
+    printf("********************************************\n");
+
+    return 0;
+}
