@@ -21,9 +21,9 @@ int main() {
         }
     }
 
-    // 2. Resultados por Estudiante
+ // 2. Resultados detallados por Estudiante
     printf("\n============================================\n");
-    printf("REPORTE POR ESTUDIANTE\n");
+    printf("        REPORTE DETALLADO: PROMEDIOS        \n");
     printf("============================================\n");
     for (int i = 0; i < 5; i++) {
         suma_est = 0;
@@ -33,7 +33,7 @@ int main() {
             if (notas[i][j] > max) max = notas[i][j];
             if (notas[i][j] < min) min = notas[i][j];
         }
-        printf("Estudiante %d -> Promedio: %.2f | Max: %.2f | Min: %.2f\n", 
+        printf("ID: Estudiante %d | Prom: %.2f | Max: %.2f | Min: %.2f\n", 
                 i + 1, suma_est / 3, max, min);
     }
 
