@@ -37,9 +37,9 @@ int main() {
                 i + 1, suma_est / 3, max, min);
     }
 
-    // 3. Resultados por Asignatura
+   // 3. Reporte de Rendimiento por Asignatura
     printf("\n============================================\n");
-    printf("REPORTE POR ASIGNATURA\n");
+    printf("     ESTADISTICAS DE APROBACION (>= 6)      \n");
     printf("============================================\n");
     for (int j = 0; j < 3; j++) {
         suma_asig = 0;
@@ -49,15 +49,15 @@ int main() {
 
         for (int i = 0; i < 5; i++) {
             suma_asig += notas[i][j];
-            if (notas[i][j] >= 6) aprobados++;
-            else reprobados++;
+            if (notas[i][j] >= 6.0) {
+                aprobados++;
+            } else {
+                reprobados++;
+            }
             if (notas[i][j] > max_a) max_a = notas[i][j];
             if (notas[i][j] < min_a) min_a = notas[i][j];
         }
-        printf("Asig. %d -> Promedio: %.2f | Max: %.2f | Min: %.2f | Ap: %d | Rep: %d\n", 
-                j + 1, suma_asig / 5, max_a, min_a, aprobados, reprobados);
+        printf("ASIGNATURA %d -> Prom: %.2f | Aprobados: %d | Reprobados: %d\n", 
+                j + 1, suma_asig / 5, aprobados, reprobados);
     }
-
-    return 0;
-}
 // Paso numero 2
